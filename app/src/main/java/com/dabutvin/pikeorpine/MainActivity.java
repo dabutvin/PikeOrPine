@@ -58,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             lose();
         }
+
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                skip(null);
+            }
+        }, 1500);
     }
 
     public void guesspine(View view) {
@@ -66,6 +73,13 @@ public class MainActivity extends AppCompatActivity {
         } else {
             lose();
         }
+
+        view.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                skip(null);
+            }
+        }, 1500);
     }
 
     public void skip(View view) {
