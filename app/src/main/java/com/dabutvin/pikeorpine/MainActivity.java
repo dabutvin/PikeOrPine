@@ -18,6 +18,8 @@ public class MainActivity extends AppCompatActivity {
     List<Place> places = new ArrayList<>();
     int placeIndex = 0;
     private int numTimesWrong = 0;
+    private int totalScore = 0;
+    private int lastAddedScore = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -107,10 +109,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
         findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
         findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
+
+        lastAddedScore = lastAddedScore * 2;
+        totalScore += lastAddedScore;
+        ((TextView)findViewById(R.id.score)).setText("" + totalScore);
     }
 
     private void lose() {
         numTimesWrong++;
+        lastAddedScore = 1;
         Log.d("LOSE", "lose");
         findViewById(R.id.correct).setVisibility(View.INVISIBLE);
 
@@ -118,14 +125,17 @@ public class MainActivity extends AppCompatActivity {
             findViewById(R.id.wrongonce).setVisibility(View.VISIBLE);
             findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
             findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
+            ((TextView)findViewById(R.id.wrongindicator)).setText("X");
         } else if (numTimesWrong == 2) {
             findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
             findViewById(R.id.wrongtwice).setVisibility(View.VISIBLE);
             findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
+            ((TextView)findViewById(R.id.wrongindicator)).setText("X X");
         } else if (numTimesWrong == 3) {
             findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
             findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
             findViewById(R.id.wrongthrice).setVisibility(View.VISIBLE);
+            ((TextView)findViewById(R.id.wrongindicator)).setText("X X X");
         }
     }
 }
