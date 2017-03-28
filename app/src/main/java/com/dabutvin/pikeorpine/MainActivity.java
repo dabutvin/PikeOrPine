@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
     List<Place> places = new ArrayList<>();
     int placeIndex = 0;
+    private int numTimesWrong = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 skip(null);
             }
-        }, 1500);
+        }, 1000);
     }
 
     public void guesspine(View view) {
@@ -79,12 +80,14 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 skip(null);
             }
-        }, 1500);
+        }, 1000);
     }
 
     public void skip(View view) {
         findViewById(R.id.correct).setVisibility(View.INVISIBLE);
-        findViewById(R.id.wrong).setVisibility(View.INVISIBLE);
+        findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
+        findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
+        findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
 
         if (places.size() == placeIndex + 1) {
             placeIndex = 0;
@@ -98,12 +101,28 @@ public class MainActivity extends AppCompatActivity {
     private void win(){
         Log.d("WIN", "win");
         findViewById(R.id.correct).setVisibility(View.VISIBLE);
-        findViewById(R.id.wrong).setVisibility(View.INVISIBLE);
+        findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
+        findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
+        findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
     }
 
     private void lose() {
+        numTimesWrong++;
         Log.d("LOSE", "lose");
         findViewById(R.id.correct).setVisibility(View.INVISIBLE);
-        findViewById(R.id.wrong).setVisibility(View.VISIBLE);
+
+        if (numTimesWrong == 1) {
+            findViewById(R.id.wrongonce).setVisibility(View.VISIBLE);
+            findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
+            findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
+        } else if (numTimesWrong == 2) {
+            findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
+            findViewById(R.id.wrongtwice).setVisibility(View.VISIBLE);
+            findViewById(R.id.wrongthrice).setVisibility(View.INVISIBLE);
+        } else if (numTimesWrong == 3) {
+            findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
+            findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
+            findViewById(R.id.wrongthrice).setVisibility(View.VISIBLE);
+        }
     }
 }
