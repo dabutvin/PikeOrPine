@@ -1,12 +1,10 @@
 package com.dabutvin.pikeorpine;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.SeekBar;
-import android.widget.TextSwitcher;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -84,6 +82,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void skip(View view) {
+        if (numTimesWrong == 3) {
+            numTimesWrong = 0;
+            this.recreate();
+        }
+
         findViewById(R.id.correct).setVisibility(View.INVISIBLE);
         findViewById(R.id.wrongonce).setVisibility(View.INVISIBLE);
         findViewById(R.id.wrongtwice).setVisibility(View.INVISIBLE);
