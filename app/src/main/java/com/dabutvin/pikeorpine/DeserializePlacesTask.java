@@ -43,7 +43,7 @@ public class DeserializePlacesTask extends AsyncTask<String, Void, List<Place>> 
 
     @Override
     protected void onPostExecute(List<Place> result) {
-        Log.d("Deserializer", "Deserialized " + result.size() + " places");
+        //Log.d("Deserializer", "Deserialized " + result.size() + " places");
         callback.onTaskFinished(result);
     }
 }
